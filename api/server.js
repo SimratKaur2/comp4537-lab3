@@ -27,7 +27,7 @@ module.exports = (req, res) => {
   const message = lang.greeting.replace("%s", name).replace("%s", serverTime);
 
   res.writeHead(200, { "Content-Type": "text/html" });
-  res.end(`${message}`);
+  res.end(`<div style="color: blue;">${message}</div>`);
 };
 
 // const server = http.createServer(requestHandler);
