@@ -5,13 +5,6 @@ const utils = require("./modules/utils");
 
 const PORT = process.env.PORT || 3000;
 
-// app.get("/COMP4537/labs/3/getDate", (req, res) => {
-//   const name = req.query.name || "Guest";
-//   const dateTime = utils.getDate();
-//   const greeting = lang.greeting.replace("%s", name).replace("%s", dateTime);
-//   res.send(`<span style=color: skyblue;">${greeting}</span>`);
-// });
-
 const requestHandler = (req, res) => {
   if (req.url.startsWith("/COMP4537/labs/3/getDate")) {
     const url = new URL(req.url, `http://${req.headers.host}`);
@@ -20,7 +13,7 @@ const requestHandler = (req, res) => {
     const message = lang.greeting.replace("%s", name).replace("%s", serverTime);
 
     res.writeHead(200, { "Content-Type": "text/html" });
-    res.end(`<div style="color: blue;">${message}</div>`);
+    res.end(`${message}`);
   } else {
     res.writeHead(404);
     res.end("Not Found");
