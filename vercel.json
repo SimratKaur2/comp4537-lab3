@@ -1,15 +1,19 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "/api/server.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/COMP4537/labs/3/getDate",
-      "dest": "/api/server.js"
-    }
-  ]
+    "version": 2,
+    "builds": [
+        {
+            "src": "api/**/*.js",
+            "use": "@vercel/node"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/api/(.*)",
+            "dest": "api/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "api/server.js"
+        }
+    ]
 }
