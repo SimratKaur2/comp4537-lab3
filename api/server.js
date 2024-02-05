@@ -1,37 +1,26 @@
-// const http = require("http");
-// const path = require("path");
+const http = require("http");
+const url = require("url");
 const lang = require("./lang/en/en.json");
-const utils = require("./modules/utils");
+const utils = require("./modules/utils.js");
 
-// const PORT = process.env.PORT || 3000;
+http
+  .createServer(function (req, res) {
+    res.writeHead(200, { "Content-Type": "text/html" });
+    let name = req.url.split("=")[1];
+    const serverTime = utils.getDate();
+    const message = lang.greeting.replace("%s", name).replace("%s", serverTime);
 
-// const requestHandler = (req, res) => {
-//   if (req.url.startsWith("/COMP4537/labs/3/getDate")) {
-//     const url = new URL(req.url, `http://${req.headers.host}`);
-//     const name = url.searchParams.get("name") || "Guest";
-//     const serverTime = utils.getDate();
-//     const message = lang.greeting.replace("%s", name).replace("%s", serverTime);
+    res.write(`<div style="color:blue;">${message}</div>`);
+    res.end();
+  })
+  .listen(8081);
 
-//     res.writeHead(200, { "Content-Type": "text/html" });
-//     res.end(`${message}`);
-//   } else {
-//     res.writeHead(404);
-//     res.end("Not Found");
-//   }
+// module.exports = (req, res) => {
+//   const url = new URL(`https://${req.headers.host}${req.url}`);
+//   const name = url.searchParams.get("name") || "Guest";
+//   const serverTime = utils.getDate();
+//   const message = lang.greeting.replace("%s", name).replace("%s", serverTime);
+
+//   res.writeHead(200, { "Content-Type": "text/html" });
+//   res.end(`<div style="color: blue;">${message}</div>`);
 // };
-
-module.exports = (req, res) => {
-  const url = new URL(`https://${req.headers.host}${req.url}`);
-  const name = url.searchParams.get("name") || "Guest";
-  const serverTime = utils.getDate();
-  const message = lang.greeting.replace("%s", name).replace("%s", serverTime);
-
-  res.writeHead(200, { "Content-Type": "text/html" });
-  res.end(`<div style="color: blue;">${message}</div>`);
-};
-
-// const server = http.createServer(requestHandler);
-
-// server.listen(PORT, () => {
-//   console.log(`Server running on port ${PORT}`);
-// });
