@@ -14,13 +14,3 @@ http
     res.end();
   })
   .listen(8081);
-
-// module.exports = (req, res) => {
-//   const url = new URL(`https://${req.headers.host}${req.url}`);
-//   const name = url.searchParams.get("name") || "Guest";
-//   const serverTime = utils.getDate();
-//   const message = lang.greeting.replace("%s", name).replace("%s", serverTime);
-
-//   res.writeHead(200, { "Content-Type": "text/html" });
-//   res.end(`<div style="color: blue;">${message}</div>`);
-// };
